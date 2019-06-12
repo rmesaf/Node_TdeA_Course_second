@@ -1,0 +1,23 @@
+{{>header}}
+    <body class="d-flex flex-column">
+        <div class="container text-center">
+            {{#if error}}
+                <div class="alert alert-danger">
+                    {{message}}
+                </div>
+            {{else}}
+                {{#if message}}
+                    <div class="alert alert-success">
+                        {{message}}
+                    </div>
+                {{/if}}
+            {{/if}}
+            
+            <section class="py-5">
+                <div class="container">
+                    <h2>Available Courses</h2>
+                    {{{listCourses "available"}}}
+                </div>
+            </section>
+        </div>
+    </body>

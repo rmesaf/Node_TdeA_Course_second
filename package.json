@@ -1,0 +1,32 @@
+{
+  "name": "node_tdea_course_second",
+  "version": "1.0.0",
+  "description": "Second assignment of Node Fundamentals, a TDA virtual course.",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index.js -e js,hbs",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmesaf/Node_TdeA_Course_second.git"
+  },
+  "keywords": [
+    "Node",
+    "Fundamentals",
+    "TDA"
+  ],
+  "author": "Ricardo Mesa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmesaf/Node_TdeA_Course_second/issues"
+  },
+  "homepage": "https://github.com/rmesaf/Node_TdeA_Course_second#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "nodemon": "^1.19.1",
+    "path": "^0.12.7"
+  }
+}

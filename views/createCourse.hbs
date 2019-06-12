@@ -1,0 +1,55 @@
+{{>header}}
+    <body class="d-flex flex-column">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-uppercase">Create Course</h5>
+                            <form class="form-signin" action="/create" method="post">
+                                <div class="form-label-group">
+                                    <input name="id" type="text" id="courseId" class="form-control" placeholder="" required autofocus>
+                                    <label for="courseId">Id</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="name" type="text" id="courseName" class="form-control" placeholder="Name" required>
+                                    <label for="courseName">Name</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <textarea name="description" type="text" id="courseDescription" class="form-control" placeholder="Description" required rows="3"></textarea>
+                                    <label for="courseDescription">Description</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="price" type="number" id="courseCost" class="form-control" placeholder="Price" required>
+                                    <label for="courseCost">Price</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <select name="mode" class="form-control mdb-select md-form" id="courseMode" >
+                                        <option value="-" disabled="true" selected="true">Choose modality</option>
+                                        <option value="v">Virtual</option>
+                                        <option value="p">Presential</option>
+                                    </select>
+                                    <!--<input type="text" id="courseMode" class="form-control" placeholder="Modality" >-->
+                                    <label for="courseMode">Modality</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="intensity" type="number" id="courseIntensity" class="form-control" placeholder="Intensity" >
+                                    <label for="courseIntensity">Intensity (Hours per week)</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <select name="state" class="form-control mdb-select md-form" id="courseStatus" >
+                                        <option value="a" selected="true">Available</option>
+                                        <option value="c">Canceled</option>
+                                        <option value="na">Not available</option>
+                                    </select>
+                                    <!--<input type="text" id="courseMode" class="form-control" placeholder="Modality" >-->
+                                    <label for="courseStatus">Status</label>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase">Create</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
