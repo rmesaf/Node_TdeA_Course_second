@@ -1,0 +1,40 @@
+{{>header}}
+    <body class="d-flex flex-column">
+        <div class="container ">
+            <div class="row">
+                <div class="container text-center">
+                    {{#if error}}
+                        <div class="alert alert-danger">
+                            {{message}}
+                        </div>
+                    {{else}}
+                        {{#if message}}
+                            <div class="alert alert-success">
+                                {{message}}
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-uppercase">UnEnroll Student</h5>
+                            <form class="form-signin" action="/unsubscribe" method="post">
+                                <div class="form-label-group">
+                                    <input name="studentId" type="text" id="studentId" class="form-control" placeholder="" required autofocus>
+                                    <label for="studentId">Document Number</label>
+                                </div>
+                                <div class="form-label-group">
+                                    {{{courseDropdown "available"}}}
+                                    <label for="course">Course</label>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase">UnEnroll</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>

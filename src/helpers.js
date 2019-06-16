@@ -81,7 +81,8 @@ hbs.registerHelper('listSubscriptions', (status) => {
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>Email</th>                                         
+                                    <th>Email</th>
+                                    <th>Telephone</th>                                          
                                 </tr>
                             </thead>
                             <tbody>

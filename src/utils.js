@@ -68,7 +68,8 @@ const getSubscribedStudents = (courseId) => {
         const row = `<tr>
                         <td>${student.documentNumber}</td>
                         <td>${student.name}</td>
-                        <td>${student.email}</td>                                       
+                        <td>${student.email}</td>
+                        <td>${student.telephone}</td>                                        
                     </tr>`;
         studentRow += row;
     });
@@ -122,6 +123,26 @@ const subscribeStudent = async(subscriptionInfo) => {
     }
 }
 
+const unSubscribeStudent = async(subscriptionInfo) => {
+    try{
+        const { studentId, courseId } = subscriptionInfo;
+        let subscriptions = await readSubscriptions();
+        let exists = subscriptions.findIndex(subscription => subscription.studentId === studentId && subscription.courseId === courseId );
+        if(exists > 0) {
+            subscriptions.splice(exists,1);
+            await fs.writeFile('./subscriptions.json', JSON.stringify(subscriptions), (err) => {
+                if(err) throw err; 
+            });
+            return { status: "success", error: false, message: "Student Unenrolled successfully" };
+        } else {
+            return { status: "error", error: true, message: "There isn't a student with that document enrolled in that course." };
+        }
+        
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     createCourse,
     createStudent,
@@ -130,4 +151,5 @@ module.exports = {
     getSubscribedStudents,
     readCourses,
     subscribeStudent,
+    unSubscribeStudent,
 };

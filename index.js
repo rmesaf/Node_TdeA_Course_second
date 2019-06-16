@@ -2,7 +2,13 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-const { createCourse, createStudent, getCourse, subscribeStudent } = require('./src/utils');
+const {
+    createCourse,
+    createStudent,
+    getCourse,
+    subscribeStudent,
+    unSubscribeStudent,
+} = require('./src/utils');
 require('./src/helpers');
 
 // Express
@@ -82,6 +88,30 @@ app.get('/course', (req, res) => {
 
 app.get('/subscriptions', (req, res) => {
     res.render('subscriptions');
+});
+
+app.get('/unsubscribe', (req, res) => {
+    res.render('unEnrollStudent');
+});
+
+app.post('/unsubscribe', (req, res) => {
+    const { body } = req;
+    const subscriptionInfo = {
+        studentId: body.studentId,
+        courseId: body.course,
+    }
+    unSubscribeStudent(subscriptionInfo).then( (response) => {
+        if(response.error){
+            res.render('unEnrollStudent', {
+                ...response,
+            });
+        }else{
+            res.render('subscriptions', {
+                ...response,
+            });
+        }
+        
+    });
 });
 
 app.get('*', (req, res) => {
