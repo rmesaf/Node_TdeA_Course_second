@@ -69,9 +69,12 @@ hbs.registerHelper('listSubscriptions', (status) => {
     listCourses.forEach( course =>  {
         let card = 
             ` <div class="card">
-                <div class="card-header" id="heading_${course.id}">
-                    <button style="text-align: left" class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapse_${course.id}" aria-expanded="true" aria-controls="collapse_${course.id}">
+                <div style="display:flex; flex-direction: row; justify-content: space-between" class="card-header" id="heading_${course.id}">
+                    <button style="text-align: left; width: 90%" class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapse_${course.id}" aria-expanded="true" aria-controls="collapse_${course.id}">
                         <h5 class="mb-0">${course.name}</h5>
+                    </button>
+                    <button class="btn btn-info" type="button" >
+                        CLOSE
                     </button>
                 </div>
                 <div id="collapse_${course.id}" class="collapse" aria-labelledby="heading_${course.id}" data-parent="#accordion">
@@ -91,6 +94,7 @@ hbs.registerHelper('listSubscriptions', (status) => {
                         </table>
                     </div>
                 </div>
+                
             </div>
             `;
         accordion += card;
