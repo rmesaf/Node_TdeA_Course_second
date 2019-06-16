@@ -1,6 +1,6 @@
 const hbs = require('hbs');
 const path = require('path');
-const { formatCurrency } = require('./utils');
+const { formatCurrency, getSubscribedStudents } = require('./utils');
 const { MODE, AVAILABLE, CANCELED } = require('./constants');
 
 hbs.registerHelper('listCourses', (status) => {
@@ -59,4 +59,41 @@ hbs.registerHelper('courseDropdown', (status) => {
     });
     select += `</select>`;
     return select;
+});
+
+hbs.registerHelper('listSubscriptions', (status) => {
+    const courses = require(path.join(__dirname, '../coursesList.json'));
+    const listCourses = courses.filter(course => course.status.toUpperCase() === status.toUpperCase());
+    const subscriptions = require(path.join(__dirname, '../coursesList.json')); 
+    let accordion = `<div class="accordion" id="accordion">`;
+    listCourses.forEach( course =>  {
+        let card = 
+            ` <div class="card">
+                <div class="card-header" id="heading_${course.id}">
+                    <button style="text-align: left" class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapse_${course.id}" aria-expanded="true" aria-controls="collapse_${course.id}">
+                        <h5 class="mb-0">${course.name}</h5>
+                    </button>
+                </div>
+                <div id="collapse_${course.id}" class="collapse" aria-labelledby="heading_${course.id}" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>                                         
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${getSubscribedStudents(course.id)}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            `;
+        accordion += card;
+    });
+    accordion += `</div>`;
+    return accordion;
 });

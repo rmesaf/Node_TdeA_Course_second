@@ -7,7 +7,8 @@ module.exports = {
     STATUS_MAP: {
         a: 'Available',
         c: 'Canceled',
-        na: 'Not Available'
+        na: 'Not Available',
+        cl: 'Closed'
     },
     AVAILABLE: 'AVAILABLE',
     CANCELED: 'CANCELED'

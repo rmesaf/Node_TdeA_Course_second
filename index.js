@@ -80,6 +80,10 @@ app.get('/course', (req, res) => {
     });
 });
 
+app.get('/subscriptions', (req, res) => {
+    res.render('subscriptions');
+});
+
 app.get('*', (req, res) => {
     res.render('index', {
         title: 'Continuous Education'

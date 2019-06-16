@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { STATUS_MAP } = require('./constants');
 
 const createCourse = async(courseInfo) => {
@@ -37,6 +38,7 @@ const createStudent = async(studentInfo) => {
         console.log(err)
     }
 }
+
 const formatCurrency = (value) => {
     return `$${value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}`;
 }
@@ -45,8 +47,34 @@ const getCourse = async(courseId) => {
     let coursesList = await readCourses();
     const course = coursesList.find(course => course.id === courseId);
     if(!course) return {};
-    return course 
+    return course; 
 }
+
+const getStudent = (studentId) => {
+    let studentList = require(path.join(__dirname, '../studentList.json'));
+    const student = studentList.find(student => student.documentNumber === studentId);
+    if(!student) return {};
+    return student; 
+}
+
+const getSubscribedStudents = (courseId) => {
+    
+    const subscriptions = require(path.join(__dirname, '../subscriptions.json'));
+    const subscribed = subscriptions.filter(subscription => subscription.courseId === courseId);
+    let studentRow = ""; 
+    subscribed.forEach( subscription =>  {
+        const { studentId } = subscription;
+        let student = getStudent(studentId);
+        const row = `<tr>
+                        <td>${student.documentNumber}</td>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>                                       
+                    </tr>`;
+        studentRow += row;
+    });
+    return studentRow;
+}
+
 const readCourses = async () => {
     try {
         const coursesListData = await require('../coursesList.json');
@@ -99,6 +127,7 @@ module.exports = {
     createStudent,
     formatCurrency,
     getCourse,
+    getSubscribedStudents,
     readCourses,
     subscribeStudent,
 };

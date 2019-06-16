@@ -1,0 +1,30 @@
+{{>header}}
+    <body class="d-flex flex-column">
+        <div class="container">
+            <div class="row">
+                <div class="container text-center">
+                    {{#if error}}
+                        <div class="alert alert-danger">
+                            {{message}}
+                        </div>
+                    {{else}}
+                        {{#if message}}
+                            <div class="alert alert-success">
+                                {{message}}
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+            
+            <section class="py-5">
+                <div class="container text-center">
+                    <h2>Subscriptions</h2>
+                </div>
+                <div class="container">
+                    {{{listSubscriptions "available"}}}
+                </div>
+                
+            </section>
+        </div>
+    </body>
