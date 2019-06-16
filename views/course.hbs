@@ -1,0 +1,19 @@
+{{>header}}
+    <body class="d-flex flex-column">
+        <div class="container">
+            <h1 class="my-4">{{name}}
+                <small>Course</small>
+            </h1>
+            <div class="row">
+                <div class="col-md-8">
+                    <img class="img-fluid" src="https://res.cloudinary.com/highereducation/image/upload/c_scale,w_750/f_auto,fl_lossy,q_auto:eco/v1532988563/TheBestColleges.org/images/study-active-recall.jpg" alt="">
+                </div>
+                <div class="col-md-4">
+                    <h3 class="my-3">Description</h3>
+                    <p>{{description}}</p>
+                    <h3 class="my-3">Details</h3>
+                    {{{courseDetails price mode intensity status}}}
+                </div>
+            </div>      
+        </div>
+    </body>

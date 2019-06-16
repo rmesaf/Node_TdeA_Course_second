@@ -1,0 +1,53 @@
+{{>header}}
+    <body class="d-flex flex-column">
+        <div class="container ">
+            <div class="row">
+                <div class="container text-center">
+                    {{#if error}}
+                        <div class="alert alert-danger">
+                            {{message}}
+                        </div>
+                    {{else}}
+                        {{#if message}}
+                            <div class="alert alert-success">
+                                {{message}}
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-uppercase">Subscribe Student</h5>
+                            <form class="form-signin" action="/subscribe" method="post">
+                                <div class="form-label-group">
+                                    <input name="documentNumber" type="text" id="documentNumber" class="form-control" placeholder="" required autofocus>
+                                    <label for="documentNumber">Document Number</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="name" type="text" id="name" class="form-control" placeholder="Name" required>
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="email" type="email" id="email" class="form-control" placeholder="Email" required></input>
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="telephone" type="tel" id="telephone" class="form-control" placeholder="Telephone" required>
+                                    <label for="telephone">Telephone</label>
+                                </div>
+                                <div class="form-label-group">
+                                    {{{courseDropdown "available"}}}
+                                    <label for="course">Course</label>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>

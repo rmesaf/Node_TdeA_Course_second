@@ -21,6 +21,32 @@ const createCourse = async(courseInfo) => {
         console.log(err)
     }
 }
+
+const createStudent = async(studentInfo) => {
+    try{
+        const { documentNumber } = studentInfo;
+        let studentList = await readStudents();
+        let exists = studentList.find(student => student.documentNumber === documentNumber);
+        if(!exists) {
+            studentList.push(studentInfo);
+            await fs.writeFile('./studentList.json', JSON.stringify(studentList), (err) => {
+                if(err) throw err; 
+            });
+        }
+    } catch(err) {
+        console.log(err)
+    }
+}
+const formatCurrency = (value) => {
+    return `$${value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}`;
+}
+
+const getCourse = async(courseId) => {
+    let coursesList = await readCourses();
+    const course = coursesList.find(course => course.id === courseId);
+    if(!course) return {};
+    return course 
+}
 const readCourses = async () => {
     try {
         const coursesListData = await require('../coursesList.json');
@@ -30,12 +56,49 @@ const readCourses = async () => {
     }
 }
 
-const formatCurrency = (value) => {
-    return `$${value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}`;
+const readStudents = async () => {
+    try {
+        const studentListData = await require('../studentList.json');
+        return studentListData;
+    } catch (err){
+        return [];
+    }
+}
+
+const readSubscriptions = async () => {
+    try {
+        const subscriptionsData = await require('../subscriptions.json');
+        return subscriptionsData;
+    } catch (err){
+        return [];
+    }
+}
+
+const subscribeStudent = async(subscriptionInfo) => {
+    try{
+        const { studentId, courseId } = subscriptionInfo;
+        let subscriptions = await readSubscriptions();
+        let exists = subscriptions.find(subscription => subscription.studentId === studentId && subscription.courseId === courseId );
+        if(!exists) {
+            subscriptions.push({studentId, courseId});
+            await fs.writeFile('./subscriptions.json', JSON.stringify(subscriptions), (err) => {
+                if(err) throw err; 
+            });
+            return { status: "success", error: false, message: "Student subscribed successfully" };
+        } else {
+            return { status: "error", error: true, message: "The student is already subscribed in that course" };
+        }
+        
+    } catch(err) {
+        console.log(err)
+    }
 }
 
 module.exports = {
     createCourse,
-    readCourses,
+    createStudent,
     formatCurrency,
+    getCourse,
+    readCourses,
+    subscribeStudent,
 };

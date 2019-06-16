@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-const { createCourse } = require('./src/utils');
+const { createCourse, createStudent, getCourse, subscribeStudent } = require('./src/utils');
 require('./src/helpers');
 
 // Express
@@ -34,8 +34,50 @@ app.post('/create', (req, res) => {
         });
     });
 });
+
+app.get('/subscribe', (req, res) => {
+    res.render('subscribeCourse');
+});
+
+app.post('/subscribe', (req, res) => {
+    const {body: studentInfo} = req;
+    const {documentNumber, name, email, telephone} = studentInfo
+    const student = { documentNumber, name, email, telephone };
+    createStudent(student).then( (response) => {
+        if(studentInfo.course){
+            const subscriptionInfo = {
+                studentId: studentInfo.documentNumber,
+                courseId: studentInfo.course,
+            };
+            subscribeStudent(subscriptionInfo).then( (response) => {
+                res.render('subscribeCourse', {
+                    ...response,
+                });
+            });
+        } else {
+            res.render('subscribeCourse', {
+                studentInfo,
+                status: "error", 
+                error: true, 
+                message: "Please select a course"
+            });
+        }
+    });
+    
+    
+});
+
 app.get('/list-courses', (req, res) => {
     res.render('listCourses');
+});
+
+app.get('/course', (req, res) => {
+    const {query: params} = req;
+    getCourse(params.id).then( (response) => {
+        res.render('course', {
+            ...response,
+        });
+    });
 });
 
 app.get('*', (req, res) => {
