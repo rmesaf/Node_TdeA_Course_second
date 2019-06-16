@@ -1,5 +1,5 @@
-# First Assignment 
-This is the first assignment of Node Fundamentals, a TDA virtual course.
+# Second Assignment 
+This is the Second assignment of Node Fundamentals, a TDA virtual course.
 
 ## Getting Started
 
@@ -30,41 +30,14 @@ npm install
 ```
 ### Running
 
-Available Methods.
+Type:
 
 ```
-listCourses   List of courses
-getCourse     Get course info usign course id
-enrollCourse  Enroll student in a course
-inscribir     Enroll student in a course
+npm run start
 ```
 
-To list courses use:
+In your browser enter to http://localhost:3000
 
-```
-node index listCourses
-node index
-```
-To get one course use:
-
-```
-node index getCourse -i <courseId>
-node index getCourse --course <courseId>
-```
-
-To enrollCourse use:
-
-```
-node index enrollCourse -i <courseId> -n <Student Name> -d <Student document number>
-node index enrollCourse --id <courseId> --name <Student Name> --documentNumber <Student document number>
-```
-
-#### Examples
-```
-node index listCourses
-node index getCourse -i 10001
-node index enrollCourse -i 10001 -n 'Ricardo Mesa' -d 78903456
-```
 
 ## Built With
 
